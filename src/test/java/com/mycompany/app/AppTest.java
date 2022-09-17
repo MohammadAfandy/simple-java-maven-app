@@ -40,6 +40,17 @@ public class AppTest
         }
     }
 
+    @Test
+    public void testAppSumInt()
+    {
+        int result = App.sumInt(1, 2);
+        try {
+            assertEquals(result, 3);
+        } catch (AssertionError e) {
+            fail("sum function is not correct");
+        }
+    }
+
     @After
     public void cleanUpStreams() {
         System.setOut(null);
