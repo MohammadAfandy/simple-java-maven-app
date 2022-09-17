@@ -20,13 +20,15 @@ node {
             junit 'target/surefire-reports/*.xml'
         }
     }
+    stage('Manual Approval') {
+        input(message: 'Lanjutkan ke tahap Deploy?', ok: 'Deploy')
+    }
     stage('Deploy') {
         def sleepTime = 1 * 60 // 1 minute
         image.inside('-v /root/.m2:/root/.m2') {
             sh './jenkins/scripts/deliver.sh'
-            echo "Waiting ${sleepTime} seconds for deployment to complete"
-            sleep (1 * 60)
-            echo "Deployment complete"
+            sleep(sleepTime)
+            echo 'Deployment complete'
         }
     }
 }
