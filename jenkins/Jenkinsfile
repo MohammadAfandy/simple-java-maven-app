@@ -27,6 +27,7 @@ node {
         def sleepTime = 1 * 60 // 1 minute
         image.inside('-v /root/.m2:/root/.m2') {
             sh './jenkins/scripts/deliver.sh'
+            archiveArtifacts artifacts: 'target/*.jar'
             sleep(sleepTime)
             echo 'Deployment complete'
         }
